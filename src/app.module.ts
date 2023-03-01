@@ -5,6 +5,7 @@ import {AppService} from './app.service';
 import {UsersModule} from './users/users.module';
 import { User } from './users/entity/users.entity';
 import {AuthMiddleware} from "./middleware/auth.middleware";
+import { AuthModule } from './auth/auth.module';
 
 //module 소스 - 모듈을 정의합니다.(controller와 service 정의)
 @Module({
@@ -19,7 +20,8 @@ import {AuthMiddleware} from "./middleware/auth.middleware";
             entities: [User],
             synchronize: true,  //synchronize: true는 운영에서는 사용하지 마세요.
         }),
-        UsersModule],
+        UsersModule,
+        AuthModule],
     controllers: [AppController],
     providers: [AppService],
 })
