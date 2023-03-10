@@ -1,6 +1,6 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {UserService} from "./user.service";
-import {UserDTO} from "./dto/user.dto";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { UserDTO } from "./dto/user.dto";
+import { UserService } from "./user.service";
 
 @Injectable()
 export class AuthService {
@@ -8,14 +8,11 @@ export class AuthService {
         private userService: UserService
     ){}
 
-    async registerUser(newUser: UserDTO) : Promise<UserDTO> {
-        let userFind: UserDTO = await this.userService.findByFields({
-            where: {userId: newUser.userId}
-        });
-        if(userFind) {
-            throw new HttpException('UserId already exists', HttpStatus.BAD_REQUEST)
+    async registerNewUser(newUser: UserDTO): Promise<UserDTO> {
+        let userFind: UserDTO = await this.userService.findByFields({ where: { username: newUser.username } });
+        if(userFind){
+            throw new HttpException('Username already used!', HttpStatus.BAD_REQUEST);
         }
-        return await this.userService.save(newUser);
+        return this.userService.save(newUser);
     }
-
 }
