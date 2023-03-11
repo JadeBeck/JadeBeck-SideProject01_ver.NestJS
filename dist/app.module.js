@@ -14,6 +14,7 @@ const app_service_1 = require("./app.service");
 const user_entity_1 = require("./auth/entity/user.entity");
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const auth_module_1 = require("./auth/auth.module");
+const movies_controller_1 = require("./movies/movies.controller");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -38,7 +39,7 @@ AppModule = __decorate([
             }),
             auth_module_1.AuthModule
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, movies_controller_1.MoviesController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);

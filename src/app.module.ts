@@ -6,9 +6,11 @@ import {AppService} from './app.service';
 import {User} from './auth/entity/user.entity';
 import {AuthMiddleware} from "./middleware/auth.middleware";
 import {AuthModule} from './auth/auth.module';
+import {MoviesController} from './movies/movies.controller';
 
 //module 소스 - 모듈을 정의합니다.(controller와 service 정의)
-@Module({
+//⭐앱 모듈(루트 모듈 비슷)에 우리가 하는 모든것 다 임포트 해야 함. 왜?! NestJS가 내 앱 만들기 위해 이용하는게 앱모듈임(main.ts 들어가보면 const app = await NestFactory.create(AppModule) 있음)
+@Module({  //네스트 쓰려면 데코레이터에 익숙해져야 함. 데코레이터는 class에 function을 더해줌
     imports: [
         TypeOrmModule.forRoot({
             type: 'mysql',
@@ -22,7 +24,7 @@ import {AuthModule} from './auth/auth.module';
         }),
         // UsersModule,
         AuthModule],
-    controllers: [AppController],
+    controllers: [AppController, MoviesController],
     providers: [AppService],
 })
 
