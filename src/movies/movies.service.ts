@@ -3,6 +3,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {getConnection} from 'typeorm';
 import {Movie} from "./entities/movie.entity";
+import {CreateMovieDto} from "./dto/create-movie.dto";
 
 @Injectable()
 export class MoviesService {
@@ -29,7 +30,7 @@ export class MoviesService {
         } //if문 안타고 전부 다 리턴됨... 이율 모르겠다;;
     };
 
-    async create(movieData: Movie): Promise<void> {
+    async create(movieData: CreateMovieDto): Promise<void> {
        //JSON.stringify(movieData.genre)
         await this.moviesRepository.save(movieData);
     };

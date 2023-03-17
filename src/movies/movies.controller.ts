@@ -1,6 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query} from '@nestjs/common';
 import {MoviesService} from "./movies.service";
 import {Movie} from "./entities/movie.entity";
+import {CreateMovieDto} from "./dto/create-movie.dto";
 
 @Controller('movies')  //이 부분이 url의 entry point를 정함. 즉, express의 라우터 부분이 되는 것.
 export class MoviesController {
@@ -24,7 +25,7 @@ export class MoviesController {
     };
 
     @Post()
-    create(@Body() movieData: Movie) {  //네스트에서는 원하는게 있음 이렇게 다 요청을 하면 됨! 바디가 필요하면 바디를 달라고 하세욧~!
+    create(@Body() movieData: CreateMovieDto) {  //네스트에서는 원하는게 있음 이렇게 다 요청을 하면 됨! 바디가 필요하면 바디를 달라고 하세욧~!
         this.moviesService.create(movieData);
         return "Movie has added";
     };
