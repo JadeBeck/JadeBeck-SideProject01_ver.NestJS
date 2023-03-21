@@ -4,6 +4,7 @@ import {Repository} from 'typeorm';
 import {getConnection} from 'typeorm';
 import {Movie} from "./entities/movie.entity";
 import {CreateMovieDto} from "./dto/create-movie.dto";
+import {UpdateMovieDto} from "./dto/update-movie.dto";
 
 @Injectable()
 export class MoviesService {
@@ -40,16 +41,16 @@ export class MoviesService {
         await this.moviesRepository.delete(id);
     };
 
-    async update(id: string, movieData: Movie): Promise<void> {
+    async update(id: string, updateData: UpdateMovieDto): Promise<void> {
         const existMovie = await this.moviesRepository.findOne({where: {id}});
         if (existMovie) {
             await getConnection()   //여기서  Connection "default" was not found 에러나는데 모르겠음 ㅠㅠ
                 .createQueryBuilder()
                 .update(Movie)
                 .set({
-                    title: movieData.title,
-                    year: movieData.year,
-                    genre: movieData.genre
+                    title: updateData.title,
+                    year: updateData.year,
+                    genre: updateData.genre
                 })
                 .where('id = :id', {id})
                 .execute();

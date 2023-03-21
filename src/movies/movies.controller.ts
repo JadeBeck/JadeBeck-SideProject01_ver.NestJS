@@ -2,6 +2,7 @@ import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query} from '@ne
 import {MoviesService} from "./movies.service";
 import {Movie} from "./entities/movie.entity";
 import {CreateMovieDto} from "./dto/create-movie.dto";
+import {UpdateMovieDto} from "./dto/update-movie.dto";
 
 @Controller('movies')  //이 부분이 url의 entry point를 정함. 즉, express의 라우터 부분이 되는 것.
 export class MoviesController {
@@ -31,7 +32,7 @@ export class MoviesController {
     };
 
     @Patch('/:id')  //put을 쓰면 movie 몽땅 다 업뎃해버림. patch 쓰면 하려는 애만 업뎃됨.
-    patch(@Param('id') movieId: string, @Body() updateData) {
+    patch(@Param('id') movieId: string, @Body() updateData: UpdateMovieDto) {
         this.moviesService.update(movieId, updateData);
         return `The #${movieId} movie has updated`;
     };
